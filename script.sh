@@ -1,2 +1,5 @@
 # Running CompiledDaemon
-CompileDaemon -command="go run ."
+CompileDaemon -command="./example/go-gin"
+
+# Running migrations, sun script at root project
+go run ./migrations/migrate.go 

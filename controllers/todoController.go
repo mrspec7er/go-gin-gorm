@@ -3,11 +3,10 @@ package controllers
 import (
 	"example/go-gin/models"
 	"example/go-gin/utility"
-	"log"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 type TodoI struct {
@@ -100,23 +99,19 @@ func deleteTodo(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, todo)
 }
 
-// script running before main function
-func init() {
-	err := godotenv.Load()
+func pointerExample(c *gin.Context) {
+	x := 10
+	y := *&x // create instance of the reference
+	z := &x // pointing to reference
 
-	if err != nil {
-		log.Fatal(err)
-	}
+	y = y + 1 // mutating variable doesen't change the reference 
+	*z = 7 // mutating variable change the reference
+
+	fmt.Println(x,y,z)
+
+	result := fmt.Sprintf("%v, %v, %v", x,y, *z) 
+
+	c.IndentedJSON(http.StatusOK, result)
 }
 
-func UtilityRouterHandler()  {
-	router := gin.Default();
-	
-	router.GET("/todos", getTodos);
-	router.POST("/todos", createTodos);
-	router.PUT("/todos", updateTodo);
-	router.DELETE("/todos", deleteTodo);
-	router.GET("/todos/:id", getTodo);
 
-	router.Run();
-}

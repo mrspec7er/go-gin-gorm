@@ -6,7 +6,6 @@ import (
 )
 
 func main()  {
-	// routerHandler();
 	utility.DBConnection()
 	controllers.UtilityRouterHandler();
 }
