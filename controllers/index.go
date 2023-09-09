@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"example/go-gin/middleware"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -27,6 +28,8 @@ func UtilityRouterHandler()  {
 	router.GET("/pointer", pointerExample);
 	router.POST("/users", createUsers);
 	router.GET("/users", getUsers);
+	router.POST("/login", login);
+	router.GET("/validate", middleware.Authentication, validate);
 
 	router.Run();
 }
